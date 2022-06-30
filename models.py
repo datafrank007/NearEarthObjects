@@ -46,19 +46,19 @@ class NearEarthObject:
         # and a missing diameter being represented by `float('nan')`.
         self.info = info
 
-        self.designation = str(info['pdes'])
+        self.designation = str(self.info['pdes'])
 
         #Convert name to: string or None
         convert_n = lambda n: str(n) if bool(n) == True else None
-        self.name = convert_n(info['name'])
+        self.name = convert_n(self.info['name'])
 
         #Convert diameter to: float or 'nan'
         convert_d = lambda d: float('nan') if bool(d) == False else float(d)
-        self.diameter = convert_d(info['diameter'])
+        self.diameter = convert_d(self.info['diameter'])
 
         #Convert hazard to boolean: True or False
         convert_h = lambda h: True if h == 'Y' else False
-        self.hazardous = convert_h(info['pha'])
+        self.hazardous = convert_h(self.info['pha'])
 
         # Create an empty initial collection of linked approaches.
         self.approaches = []
@@ -109,7 +109,7 @@ class CloseApproach:
         # The `cd_to_datetime` function will be useful.
 
         self.info = info
-        self._designation = str(self.info['des'])
+        self._designation = self.info['des']
         self.time = cd_to_datetime(self.info['cd'])  # TODO: Use the cd_to_datetime function for this attribute.
         self.distance = float(self.info['dist'])
         self.velocity = float(self.info['v_rel'])
