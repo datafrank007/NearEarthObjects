@@ -43,31 +43,32 @@ class NEODatabase:
         self._approaches = approaches
 
         # TODO: What additional auxiliary data structures will be useful?
-    def neo_by_des(self, neos):
+    @neo_des_dic
+    def neo_by_des(self):
         #Create dict for getting neo by des and returning neo
-        neo_by_des_dic = {}
-        for neo in neos:
-            neo_by_name_dic[neo.designation] = neo
-        return neo_by_name_dic
+        neo_des_dic = {}
+        for neo in self._neos:
+            neo_des_dic[neo.designation] = neo
+        return neo_des_dic
 
-    def neo_by_name(self, neos):
+    @neo_name_dic
+    def neo_by_name(self):
         #Create dict for getting neo by des and returning neo
-        neo_by_name_dic = {}
-        for neo in neos:
-            neo_by_name_dic[neo.name] = neo
-        return neo_by_name_dic
+        neo_name_dic = {}
+        for neo in self._neos:
+            neo_name_dic[neo.name] = neo
+        return neo_name_dic
 
         # TODO: Link together the NEOs and their close approaches.
-    def approach_link(self, neos, approaches):
+    @approach_list
+    def approach_link(self):
         #Create a dictionary of NEOS -> Approaches
         approach_dict = {}
-        for neo in neos:
-            approach_dict[neo.designation] = [approach for approach in approaches if neo.designation == approach._designation]
+        for neo in self._neos:
+            approach_dict[neo] = [approach for approach in self._approaches if self._neo.designation == self._approach._designation]
         #Link neos to approaches using dict
-        for neo in neos:
-            neo.approaches = approach_dic.get(neo.designation)
-
-
+        for neo in self._neos:
+            neo.approaches = approach_dic.get(neo)
 
     def get_neo_by_designation(self, designation):
         """Find and return an NEO by its primary designation.
@@ -83,11 +84,9 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
         # TODO: Fetch an NEO by its primary designation.
-        #Create dict for looking up neo_by_des
-        dict = neo_by_des(self._neos)
-        #Get neo designation from neo_by_des function
-        output = dict.get(designation)
-        return output
+        #Get neo designation from neo_by_des method
+        neo_des = self.neo_des_dic.get(designation)
+        return neo_des
 
     def get_neo_by_name(self, name):
         """Find and return an NEO by its name.
@@ -104,7 +103,8 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
         # TODO: Fetch an NEO by its name.
-        return None
+        neo_name = self.neo_name_dic.get(name)
+        return neo_name
 
     def query(self, filters=()):
         """Query close approaches to generate those that match a collection of filters.
