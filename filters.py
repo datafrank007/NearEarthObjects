@@ -149,49 +149,49 @@ def create_filters(
     :return: A collection of filters for use with `query`.
     """
     # TODO: Decide how you will represent your filters.
-    filter = []
+    filter_criteria = []
 
     if date is not None:
         date_filter = DateFilter(operator.eq, date)
-        filter.append(date_filter)
+        filter_criteria.append(date_filter)
 
     if start_date is not None:
         start_date_filter = DateFilter(operator.ge, start_date)
-        filter.append(start_date_filter)
+        filter_criteria.append(start_date_filter)
 
     if end_date is not None:
         end_date_filter = DateFilter(operator.le, end_date)
-        filter.append(end_date_filter)
+        filter_criteria.append(end_date_filter)
 
     if distance_min is not None:
         d_min_filter = DistanceFilter(operator.ge, distance_min)
-        filter.append(d_min_filter)
+        filter_criteria.append(d_min_filter)
 
     if distance_max is not None:
         d_max_filter = DistanceFilter(operator.ge, distance_max)
-        filter.append(d_max_filter)
+        filter_criteria.append(d_max_filter)
 
     if velocity_min is not None:
         v_min_filter = VelocityFilter(operator.ge, velocity_min)
-        filter.append(v_min_filter)
+        filter_criteria.append(v_min_filter)
 
     if velocity_max is not None:
         v_max_filter = VelocityFilter(operator.le, velocity_max)
-        filter.append(v_max_filter)
+        filter_criteria.append(v_max_filter)
 
     if diameter_min is not None:
         d_min_filter = DiameterFilter(operator.ge, diameter_min)
-        filter.append(d_min_filter)
+        filter_criteria.append(d_min_filter)
 
     if diameter_max is not None:
         d_max_filter = DiameterFilter(operator.le, diameter_max)
-        filter.append(d_max_filter)
+        filter_criteria.append(d_max_filter)
 
     if hazardous is not None:
         h_filter = HazardousFilter(operator.eq, hazardous)
-        filter.append(h_filter)
+        filter_criteria.append(h_filter)
 
-    return (filter)
+    return (filter_criteria)
 
 
 def limit(iterator, n=None):
@@ -205,9 +205,6 @@ def limit(iterator, n=None):
     """
     # TODO: Produce at most `n` values from the given iterator.
     if n is None:
-        return iterator
-
-    if n == 0:
         return iterator
 
     else:
