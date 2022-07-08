@@ -17,7 +17,7 @@ iterator.
 You'll edit this file in Tasks 3a and 3c.
 """
 import operator
-
+import itertools
 
 class UnsupportedCriterionError(NotImplementedError):
     """A filter criterion is unsupported."""
@@ -168,7 +168,7 @@ def create_filters(
         filter_criteria.append(d_min_filter)
 
     if distance_max is not None:
-        d_max_filter = DistanceFilter(operator.ge, distance_max)
+        d_max_filter = DistanceFilter(operator.le, distance_max)
         filter_criteria.append(d_max_filter)
 
     if velocity_min is not None:
@@ -204,7 +204,7 @@ def limit(iterator, n=None):
     :yield: The first (at most) `n` values from the iterator.
     """
     # TODO: Produce at most `n` values from the given iterator.
-    if n is None:
+    if n is None or n == 0:
         return iterator
 
     else:

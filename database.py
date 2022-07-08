@@ -108,6 +108,6 @@ class NEODatabase:
                 yield approach
 
         else:
-            results = list(filter(filters, self._approaches))
-            for result in results:
-                yield result
+            for approach in self._approaches:
+                if all([criteria(approach) for criteria in filters]) == True:
+                    yield approach
