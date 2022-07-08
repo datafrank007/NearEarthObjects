@@ -72,6 +72,46 @@ class AttributeFilter:
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 
+class DateFilter(AttributeFilter):
+    '''Create filter for approach date'''
+
+    @classmethod
+    def get(cls, approach):
+        return approach.time.date()
+
+
+class DistanceFilter(AttributeFilter):
+    '''Create filter for distance'''
+
+    @classmethod
+    def get(cls, approach):
+        return approach.distance
+
+
+class VelocityFilter(AttributeFilter):
+    '''Create filter for velocity'''
+
+    @classmethod
+    def get(cls, approach):
+        return approach.velocity
+
+
+class DiameterFilter(AttributeFilter):
+    '''Create filter for diameter'''
+
+    @classmethod
+    def get(cls, approach):
+        return approach.neo.diameter
+
+
+class HazardousFilter(AttributeFilter):
+    '''Create filter for hazardous status'''
+
+    @classmethod
+    def get(cls, approach):
+        return approach.neo.hazardous
+        
+
 def create_filters(
         date=None, start_date=None, end_date=None,
         distance_min=None, distance_max=None,
