@@ -40,20 +40,20 @@ def load_approaches(cad_json_path):
     :return: A collection of `CloseApproach`es.
     """
     # TODO: Load close approach data from the given JSON file.
-    #Extract data into python and parse into Python object
+    # Extract data into python and parse into Python object
     with open(cad_json_path) as cad_file:
         cad_import = json.load(cad_file)
 
-        #Create empty list
+        # Create empty list
         cad_list = []
 
-        #Import dictionary keys
+        # Import dictionary keys
         cad_keys = cad_import['fields']
 
-        #Import data
+        # Import data
         cad_data = cad_import['data']
 
-        #Transform each data list into a cad object
+        # Transform each data list into a cad object
         for obj in range(len(cad_data)):
             cad_obj = (dict(zip(cad_keys, cad_data[obj])))
             cad_list.append(CloseApproach(cad_obj))

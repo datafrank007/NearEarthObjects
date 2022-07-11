@@ -48,15 +48,15 @@ class NearEarthObject:
 
         self.designation = str(self.info['pdes'])
 
-        #Convert name to: string or None
+        # Convert name to: string or None
         convert_n = lambda n: str(n) if bool(n) == True else None
         self.name = convert_n(self.info['name'])
 
-        #Convert diameter to: float or 'nan'
+        # Convert diameter to: float or 'nan'
         convert_d = lambda d: float('nan') if bool(d) == False else float(d)
         self.diameter = convert_d(self.info['diameter'])
 
-        #Convert hazard to boolean: True or False
+        # Convert hazard to boolean: True or False
         convert_h = lambda h: True if h == 'Y' else False
         self.hazardous = convert_h(self.info['pha'])
 
@@ -143,7 +143,7 @@ class CloseApproach:
         # The project instructions include one possibility. Peek at the __repr__
         # method for examples of advanced string formatting.
         return (f"A CloseApproach having the following properties: (designation={self._designation!r}, time={self.time_str!r},"
-    f"distance={self.distance:.3f}, velocity={self.velocity!r})")
+        f"distance={self.distance:.3f}, velocity={self.velocity!r})")
 
     def __repr__(self):
         """Return `repr(self)`, a computer-readable string representation of this object."""

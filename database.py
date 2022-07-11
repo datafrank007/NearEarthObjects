@@ -43,8 +43,8 @@ class NEODatabase:
         self._approaches = approaches
 
         # TODO: What additional auxiliary data structures will be useful?
-        self.neo_by_des = {neo.designation : neo for neo in self._neos}
-        self.neo_by_name = {neo.name : neo for neo in self._neos}
+        self.neo_by_des = {neo.designation: neo for neo in self._neos}
+        self.neo_by_name = {neo.name: neo for neo in self._neos}
 
         # TODO: Link together the NEOs and their close approaches.
         for approach in self._approaches:
@@ -66,7 +66,7 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
         # TODO: Fetch an NEO by its primary designation.
-        #Get neo designation from neo_by_des method
+        # Get neo designation from neo_by_des method
         get_neo = self.neo_by_des.get(designation)
         return get_neo
 
