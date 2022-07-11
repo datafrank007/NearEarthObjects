@@ -44,13 +44,28 @@ class NearEarthObject:
 
         self.designation = str(self.info['pdes'])
 
-        convert_n = lambda n: str(n) if bool(n) is True else None
+        def convert_n(name):
+            if bool(name) is True:
+                return str(name)
+            else:
+                return None
+
         self.name = convert_n(self.info['name'])
 
-        convert_d = lambda d: float('nan') if bool(d) is False else float(d)
+        def convert_d(diameter):
+            if bool(diameter) is False:
+                return float('nan')
+            else:
+                return float(diameter)
+
         self.diameter = convert_d(self.info['diameter'])
 
-        convert_h = lambda h: True if h == 'Y' else False
+        def convert_h(hazardous):
+            if hazardous == 'Y':
+                return True
+            else:
+                return False
+
         self.hazardous = convert_h(self.info['pha'])
 
         self.approaches = []
