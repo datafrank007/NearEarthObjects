@@ -1,5 +1,4 @@
-"""Provide filters for querying close approaches and limit the generated
-results.
+"""Provide filters for querying close approaches and number of results.
 
 The `create_filters` function produces a collection of objects that is used by
 the `query` method to generate a stream of `CloseApproach` objects that match
@@ -40,9 +39,9 @@ class AttributeFilter:
     Concrete subclasses can override the `get` classmethod to provide custom
     behavior to fetch a desired attribute from the given `CloseApproach`.
     """
+
     def __init__(self, op, value):
-        """Construct a new `AttributeFilter` from an binary predicate and a
-        reference value.
+        """Construct a new `AttributeFilter`.
 
         The reference value will be supplied as the second (right-hand side)
         argument to the operator function. For example, an `AttributeFilter`
@@ -73,47 +72,57 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """Return `repr(self)'.
+
+        a computer-readable string representation of
+        this object.
+        """
         return (f"{self.__class__.__name__}"
                 f"(op=operator.{self.op.__name__},value={self.value})")
 
 
 class DateFilter(AttributeFilter):
-    '''Create filter for approach date'''
+    """Filter by approach date."""
 
     @classmethod
     def get(cls, approach):
+        """Return approach date."""
         return approach.time.date()
 
 
 class DistanceFilter(AttributeFilter):
-    '''Create filter for distance'''
+    """Filter by distance."""
 
     @classmethod
     def get(cls, approach):
+        """Return approach distance."""
         return approach.distance
 
 
 class VelocityFilter(AttributeFilter):
-    '''Create filter for velocity'''
+    """Filter by velocity."""
 
     @classmethod
     def get(cls, approach):
+        """Return approach velocity."""
         return approach.velocity
 
 
 class DiameterFilter(AttributeFilter):
-    '''Create filter for diameter'''
+    """Filter by diameter."""
 
     @classmethod
     def get(cls, approach):
+        """Return approach diameter."""
         return approach.neo.diameter
 
 
 class HazardousFilter(AttributeFilter):
-    '''Create filter for hazardous status'''
+    """Filter by hazardous status."""
 
     @classmethod
     def get(cls, approach):
+        """Return hazardous status."""
         return approach.neo.hazardous
 
 
@@ -163,7 +172,6 @@ def create_filters(
     potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-
     filter_criteria = []
 
     if date is not None:
@@ -218,7 +226,6 @@ def limit(iterator, n=None):
     :param n: The maximum number of values to produce.
     :yield: The first (at most) `n` values from the iterator.
     """
-
     if n is None or n == 0:
         return iterator
 
