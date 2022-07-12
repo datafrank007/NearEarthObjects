@@ -60,7 +60,6 @@ def write_to_json(results, filename):
     :param filename: A Path-like object pointing to where the data should be
     saved.
     """
-
     output = []
 
     for result in results:
