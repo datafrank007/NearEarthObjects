@@ -39,7 +39,6 @@ class NearEarthObject:
         :param info: A dictionary of excess keyword arguments supplied to the
         constructor.
         """
-
         self.info = info
 
         self.designation = str(self.info['pdes'])
@@ -73,19 +72,20 @@ class NearEarthObject:
     @property
     def fullname(self):
         """Return a representation of the full name of this NEO."""
-
         return(f"NearEarthObject Full Name: ({self.designation} {self.name})")
 
     def __str__(self):
         """Return `str(self)`."""
-
         return (f"A Near Earth Object having the following properties: "
                 f"designation={self.designation!r}, name={self.name!r}, "
                 f"diameter={self.diameter: .3f}, hazardous={self.hazardous!r}")
 
     def __repr__(self):
-        """Return `repr(self)`, a computer-readable string representation of
-        this object."""
+        """Return `repr(self)'.
+
+        a computer-readable string representation of
+        this object.
+        """
         return (f"NearEarthObject(designation={self.designation!r}, "
                 f"name={self.name!r}, " f"diameter={self.diameter: .3f}, "
                 f"hazardous={self.hazardous!r})")
@@ -111,7 +111,6 @@ class CloseApproach:
         :param info: A dictionary of excess keyword arguments supplied to the
         constructor.
         """
-
         self.info = info
         self._designation = self.info['des']
         self.time = cd_to_datetime(self.info['cd'])
@@ -122,8 +121,7 @@ class CloseApproach:
 
     @property
     def time_str(self):
-        """Return a formatted representation of this `CloseApproach`'s approach
-        time.
+        """Return formatted representation of `CloseApproach`'s approach time.
 
         The value in `self.time` should be a Python `datetime` object. While a
         `datetime` object has a string representation, the default
@@ -134,21 +132,22 @@ class CloseApproach:
         formatted string that can be used in human-readable representations and
         in serialization to CSV and JSON files.
         """
-
         self.str = datetime_to_str(self.time)
 
         return self.str
 
     def __str__(self):
         """Return `str(self)`."""
-
         return (f"A CloseApproach having the following properties: "
                 f"designation={self._designation!r}, time={self.time_str!r}, "
                 f"distance={self.distance: .3f}, velocity={self.velocity!r})")
 
     def __repr__(self):
-        """Return `repr(self)`, a computer-readable string representation of
-        this object."""
+        """Return `repr(self)`.
+
+        A computer-readable string representation of
+        this object.
+        """
         return (f"CloseApproach(time={self.time_str!r}, "
                 f"distance={self.distance: .2f}, "
                 f"velocity={self.velocity: .2f}, neo={self.neo!r})")
